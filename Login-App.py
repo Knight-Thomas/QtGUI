@@ -12,10 +12,17 @@ class Ui(QtWidgets.QMainWindow):
         uic.loadUi('/Users/tomknight/GUI-programming/PyQtGUI/QtGUI/login.ui', self)
 
         #add event listeners
-
+        self.btnLogin.clicked.connect(self.loginMethod)
+        self.btnClear.clicked.connect(self.clearMethod)
         #show the window
         self.show()
 
+    def loginMethod(self):
+        '''Handle click events on the login button'''
+        print('Login button was clicked')
+    def clearMethod(self):
+        '''Resets the form fields'''
+        print('Clear button was clicked')
 def mainAppication():
     '''Main application load the window instance'''
     app = QtWidgets.QApplication(sys.argv)
