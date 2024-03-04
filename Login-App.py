@@ -19,10 +19,33 @@ class Ui(QtWidgets.QMainWindow):
 
     def loginMethod(self):
         '''Handle click events on the login button'''
-        print('Login button was clicked')
+        #access form line edits
+        enteredUsername = self.userNameInput.text()
+        enteredPassword = self.passwordInput.text()
+        print(f'username: {enteredUsername} | Password: {enteredPassword}')
     def clearMethod(self):
         '''Resets the form fields'''
-        print('Clear button was clicked')
+        self.userNameInput.setText('')
+        self.passwordInput.setText('')
+
+def messageBoxHandler(title, message, iconType='info'):
+    '''this will display a dialogue message'''
+    msgBox = QtWidgets.QMessageBox() #this line creates a message box object
+    # set icon type based on the flag
+    if iconType ==  'Info':
+        msgBox.setIcon(QtWidgets.QMessageBox.information)
+    elif iconType == 'question':
+        msgBox.setIcon(QtWidgets.QMessageBox.question)
+    elif iconType == 'warning':
+        msgBox.setIcon(QtWidgets.QMessageBox.warning)  
+    else:
+        msgBox.setIcon(QtWidgets.QMessageBox.critical)
+    #set the title
+    msgBox.setWindowTitle(title)
+    #set the content
+    msgBox.setText(message)  
+    msgBox.exec_() #show the msg box
+
 def mainAppication():
     '''Main application load the window instance'''
     app = QtWidgets.QApplication(sys.argv)
