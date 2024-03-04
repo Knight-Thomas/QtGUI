@@ -22,7 +22,12 @@ class Ui(QtWidgets.QMainWindow):
         #access form line edits
         enteredUsername = self.userNameInput.text()
         enteredPassword = self.passwordInput.text()
-        print(f'username: {enteredUsername} | Password: {enteredPassword}')
+        #perform validation on the username and password
+        if enteredPassword == '' or enteredUsername =='':
+            messageBoxHandler('Blank fields detected','Password and Username must be entered','warning')
+        else:
+            messageBoxHandler('Success', 'You have logged in successfully')
+    
     def clearMethod(self):
         '''Resets the form fields'''
         self.userNameInput.setText('')
@@ -33,13 +38,13 @@ def messageBoxHandler(title, message, iconType='info'):
     msgBox = QtWidgets.QMessageBox() #this line creates a message box object
     # set icon type based on the flag
     if iconType ==  'Info':
-        msgBox.setIcon(QtWidgets.QMessageBox.information)
+        msgBox.setIcon(QtWidgets.QMessageBox.Information)
     elif iconType == 'question':
-        msgBox.setIcon(QtWidgets.QMessageBox.question)
+        msgBox.setIcon(QtWidgets.QMessageBox.Question)
     elif iconType == 'warning':
-        msgBox.setIcon(QtWidgets.QMessageBox.warning)  
+        msgBox.setIcon(QtWidgets.QMessageBox.Warning)  
     else:
-        msgBox.setIcon(QtWidgets.QMessageBox.critical)
+        msgBox.setIcon(QtWidgets.QMessageBox.Critical)
     #set the title
     msgBox.setWindowTitle(title)
     #set the content
