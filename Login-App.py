@@ -1,6 +1,7 @@
 #import required modules
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 import sys
+import sqlite3
 
 #create the login widget class - each window must habe a class
 
@@ -51,6 +52,12 @@ def messageBoxHandler(title, message, iconType='info'):
     msgBox.setText(message)  
     msgBox.exec_() #show the msg box
 
+def dbConnector():
+    '''connects to the database and returns a cursor and connection object'''
+    conn = sqlite3.connect('usersAndFilms.db')
+    cur = conn.cursor()
+    return conn,cur
+
 def mainAppication():
     '''Main application load the window instance'''
     app = QtWidgets.QApplication(sys.argv)
@@ -58,4 +65,5 @@ def mainAppication():
     window.show()
     sys.exit(app.exec_())
 
-mainAppication()
+#mainAppication()
+#print(dbConnector())
