@@ -58,6 +58,19 @@ def dbConnector():
     cur = conn.cursor()
     return conn,cur
 
+def executeStatementHelper(query, args=None):
+    '''connects and executes a give query returning the data'''
+    conn, cur = dbConnector()
+    if not args:
+        cur.execute(query)
+    else:
+        cur.execute(query, args)
+    #fetch results 
+    selectedData = cur.fetchall()
+    conn.commit()
+    conn.close()
+    return selectedData
+
 def mainAppication():
     '''Main application load the window instance'''
     app = QtWidgets.QApplication(sys.argv)
