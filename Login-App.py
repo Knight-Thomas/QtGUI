@@ -27,7 +27,18 @@ class Ui(QtWidgets.QMainWindow):
         if enteredPassword == '' or enteredUsername =='':
             messageBoxHandler('Blank fields detected','Password and Username must be entered','warning')
         else:
-            messageBoxHandler('Success', 'You have logged in successfully')
+            #query to ckeck if username exists and password matches 
+            query =f"""SELECT password FROM users WHERE username =?"""
+            data = executeStatementHelper(query, (enteredUsername,))
+            try:
+                if data[0][0] == enteredPassword:
+                    messageBoxHandler('Success', 'You have logged in successfully')
+                    self.close()
+                    #this is where code for opening another window would come in
+                else:
+                    messageBoxHandler('Error', 'Password is incorrect', 'warning')
+            except:
+                messageBoxHandler('Error', 'Username or Password is inorrect', 'warning')
     
     def clearMethod(self):
         '''Resets the form fields'''
@@ -78,5 +89,5 @@ def mainAppication():
     window.show()
     sys.exit(app.exec_())
 
-#mainAppication()
+mainAppication()
 #print(dbConnector())
